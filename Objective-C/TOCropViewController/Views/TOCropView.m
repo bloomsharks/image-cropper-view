@@ -28,8 +28,8 @@
 
 #define TOCROPVIEW_BACKGROUND_COLOR [UIColor colorWithWhite:0.12f alpha:1.0f]
 
-static const CGFloat kTOCropViewPadding = 14.0f;
-static const NSTimeInterval kTOCropTimerDuration = 0.8f;
+static const CGFloat kTOCropViewPadding = 16.0f;
+static const NSTimeInterval kTOCropTimerDuration = 0.5f;
 static const CGFloat kTOCropViewMinimumBoxSize = 42.0f;
 static const CGFloat kTOCropViewCircularPathRadius = 300.0f;
 static const CGFloat kTOMaximumZoomScale = 15.0f;
@@ -140,7 +140,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     
     //View properties
     self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.backgroundColor = TOCROPVIEW_BACKGROUND_COLOR;
+    self.backgroundColor = [UIColor whiteColor];
     self.cropBoxFrame = CGRectZero;
     self.applyInitialCroppedImageFrame = NO;
     self.editing = NO;
@@ -194,7 +194,8 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     
     //Translucency View
     if (NSClassFromString(@"UIVisualEffectView")) {
-        self.translucencyEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        self.translucencyEffect = [UIBlurEffect effectWithStyle:
+        UIBlurEffectStyleLight];
         self.translucencyView = [[UIVisualEffectView alloc] initWithEffect:self.translucencyEffect];
         self.translucencyView.frame = self.bounds;
     }
@@ -242,10 +243,10 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     [self addSubview:self.gridOverlayView];
     
     // The pan controller to recognize gestures meant to resize the grid view
-    self.gridPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gridPanGestureRecognized:)];
-    self.gridPanGestureRecognizer.delegate = self;
-    [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.gridPanGestureRecognizer];
-    [self addGestureRecognizer:self.gridPanGestureRecognizer];
+//    self.gridPanGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(gridPanGestureRecognized:)];
+//    self.gridPanGestureRecognizer.delegate = self;
+//    [self.scrollView.panGestureRecognizer requireGestureRecognizerToFail:self.gridPanGestureRecognizer];
+//    [self addGestureRecognizer:self.gridPanGestureRecognizer];
 }
 
 #pragma mark - View Layout -
@@ -321,7 +322,7 @@ typedef NS_ENUM(NSInteger, TOCropViewOverlayEdge) {
     CGRect frame = CGRectZero;
     frame.size = self.hasAspectRatio ? cropBoxSize : scaledSize;
     frame.origin.x = bounds.origin.x + floorf((CGRectGetWidth(bounds) - frame.size.width) * 0.5f);
-    frame.origin.y = bounds.origin.y + floorf((CGRectGetHeight(bounds) - frame.size.height) * 0.5f);
+    frame.origin.y = floorf((CGRectGetHeight(bounds) - frame.size.height) * 0.5f) + bounds.origin.y;
     self.cropBoxFrame = frame;
     
     //set the fully zoomed out state initially

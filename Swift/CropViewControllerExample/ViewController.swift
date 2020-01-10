@@ -34,22 +34,24 @@ class ViewController: UIViewController, CropViewControllerDelegate, UIImagePicke
     
         // -- Uncomment the following lines of code to test out the aspect ratio features --
         //cropController.aspectRatioPreset = .presetSquare; //Set the initial aspect ratio as a square
-        //cropController.aspectRatioLockEnabled = true // The crop box is locked to the aspect ratio and can't be resized away from it
+        cropController.aspectRatioLockEnabled = true // The crop box is locked to the aspect ratio and can't be resized away from it
         //cropController.resetAspectRatioEnabled = false // When tapping 'reset', the aspect ratio will NOT be reset back to default
         //cropController.aspectRatioPickerButtonHidden = true
     
         // -- Uncomment this line of code to place the toolbar at the top of the view controller --
-        //cropController.toolbarPosition = .top
+        cropController.toolbarPosition = .top
     
-        //cropController.rotateButtonsHidden = true
-        //cropController.rotateClockwiseButtonHidden = true
-    
+        cropController.rotateClockwiseButtonHidden = true
+        cropController.rotateButtonsHidden = true
+        cropController.aspectRatioPickerButtonHidden = true
+        cropController.resetButtonHidden = true
+        
         //cropController.doneButtonTitle = "Title"
         //cropController.cancelButtonTitle = "Title"
         
         //cropController.toolbar.doneButtonHidden = true
         //cropController.toolbar.cancelButtonHidden = true
-        //cropController.toolbar.clampButtonHidden = true
+        cropController.toolbar.clampButtonHidden = true
 
         self.image = image
         
@@ -203,7 +205,7 @@ class ViewController: UIViewController, CropViewControllerDelegate, UIImagePicke
             imageFrame.size.width *= scale
             imageFrame.size.height *= scale
             imageFrame.origin.x = (self.view.bounds.size.width - imageFrame.size.width) * 0.5
-            imageFrame.origin.y = (self.view.bounds.size.height - imageFrame.size.height) * 0.5
+            imageFrame.origin.y = (self.view.bounds.size.height - imageFrame.size.height) * 0.5;
             imageView.frame = imageFrame
         }
         else {

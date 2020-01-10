@@ -38,6 +38,7 @@
 @property (nonatomic, strong) UIButton *clampButton;
 
 @property (nonatomic, strong) UIButton *rotateButton; // defaults to counterclockwise button for legacy compatibility
+@property (nonatomic, strong) UILabel *title;
 
 @property (nonatomic, assign) BOOL reverseContentLayout; // For languages like Arabic where they natively present content flipped from English
 
@@ -56,8 +57,10 @@
 
 - (void)setup {
     self.backgroundView = [[UIView alloc] initWithFrame:self.bounds];
-    self.backgroundView.backgroundColor = [UIColor colorWithWhite:0.12f alpha:1.0f];
+    self.backgroundView.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
     [self addSubview:self.backgroundView];
+    
+    
     
     // On iOS 9, we can use the new layout features to determine whether we're in an 'Arabic' style language mode
     if (@available(iOS 9.0, *)) {
@@ -77,7 +80,8 @@
 																  resourceBundle,
                                                                   nil)
                      forState:UIControlStateNormal];
-    [_doneTextButton setTitleColor:[UIColor colorWithRed:1.0f green:0.8f blue:0.0f alpha:1.0f] forState:UIControlStateNormal];
+    
+    [_doneTextButton setTitleColor:[UIColor colorWithRed:0.273f green:0.471f blue:0.995f alpha:1.0f] forState:UIControlStateNormal];
     [_doneTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
     [_doneTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [_doneTextButton sizeToFit];
@@ -92,15 +96,34 @@
     _cancelTextButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
     [_cancelTextButton setTitle: _cancelTextButtonTitle ?
-        _cancelTextButtonTitle : NSLocalizedStringFromTableInBundle(@"Cancel",
+        _cancelTextButtonTitle : NSLocalizedStringFromTableInBundle(@"",
 																	@"TOCropViewControllerLocalizable",
 																	resourceBundle,
                                                                     nil)
                        forState:UIControlStateNormal];
-    [_cancelTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    //[_cancelTextButton.titleLabel setFont:[UIFont systemFontOfSize:17.0f]];
+    [_cancelTextButton setImage:[UIImage imageNamed:@"backIcon"] forState:UIControlStateNormal];
     [_cancelTextButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [_cancelTextButton sizeToFit];
+    _cancelTextButton.tintColor = [UIColor blackColor];
     [self addSubview:_cancelTextButton];
+    
+    UIFont * customFont = [UIFont systemFontOfSize: 17]; //custom font
+    CGSize labelSize = [@"asda" sizeWithFont:customFont constrainedToSize:CGSizeMake(40, 20) lineBreakMode:NSLineBreakByTruncatingTail];
+    _title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelSize.width, labelSize.height)];
+    _title.text = @"Crop";
+    _title.font = customFont;
+    _title.numberOfLines = 1;
+    _title.adjustsFontSizeToFitWidth = YES;
+    _title.adjustsLetterSpacingToFitWidth = YES;
+    _title.minimumScaleFactor = 10.0f/12.0f;
+    _title.clipsToBounds = YES;
+    _title.backgroundColor = [UIColor clearColor];
+    _title.textColor = [UIColor blackColor];
+    _title.textAlignment = NSTextAlignmentCenter;
+     [self addSubview: _title];
+  
+    
     
     _cancelIconButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_cancelIconButton setImage:[TOCropToolbar cancelImage] forState:UIControlStateNormal];
@@ -141,6 +164,8 @@
 {
     [super layoutSubviews];
     
+    
+    
     BOOL verticalLayout = (CGRectGetWidth(self.bounds) < CGRectGetHeight(self.bounds));
     CGSize boundsSize = self.bounds.size;
     
@@ -157,6 +182,12 @@
     frame.size.height += self.backgroundViewOutsets.top;
     frame.size.height += self.backgroundViewOutsets.bottom;
     self.backgroundView.frame = frame;
+   
+    
+   
+   
+    
+   
     
 #if TOCROPTOOLBAR_DEBUG_SHOWING_BUTTONS_CONTAINER_RECT
     static UIView *containerView = nil;
@@ -169,7 +200,7 @@
 #endif
     
     if (verticalLayout == NO) {
-        CGFloat insetPadding = 10.0f;
+        CGFloat insetPadding = 16.0f;
         
         // Work out the cancel button frame
         CGRect frame = CGRectZero;
@@ -177,7 +208,7 @@
         frame.size.width = MIN(self.frame.size.width / 3.0, self.cancelTextButton.frame.size.width);
 
         //If normal layout, place on the left side, else place on the right
-        if (self.reverseContentLayout == NO) {
+        if (self.reverseContentLayout == YES) {
             frame.origin.x = insetPadding;
         }
         else {
@@ -188,7 +219,7 @@
         // Work out the Done button frame
         frame.size.width = MIN(self.frame.size.width / 3.0, self.doneTextButton.frame.size.width);
         
-        if (self.reverseContentLayout == NO) {
+        if (self.reverseContentLayout == YES) {
             frame.origin.x = boundsSize.width - (frame.size.width + insetPadding);
         }
         else {
@@ -213,6 +244,16 @@
         containerView.frame = containerRect;
 #endif
         
+        _backgroundView.layer.shadowRadius  = 1.5f;
+        _backgroundView.layer.shadowColor   = [UIColor grayColor].CGColor;
+        _backgroundView.layer.shadowOffset  = CGSizeMake(0.0f, 0.0f);
+        _backgroundView.layer.shadowOpacity = 0.15f;
+        _backgroundView.layer.masksToBounds = NO;
+
+        UIEdgeInsets shadowInsets     = UIEdgeInsetsMake(0, 0, -1.0f, 0);
+        UIBezierPath *shadowPath      = [UIBezierPath bezierPathWithRect:UIEdgeInsetsInsetRect(_backgroundView.bounds, shadowInsets)];
+        _backgroundView.layer.shadowPath    = shadowPath.CGPath;
+        
         CGSize buttonSize = (CGSize){44.0f,44.0f};
         
         NSMutableArray *buttonsInOrderHorizontally = [NSMutableArray new];
@@ -231,6 +272,8 @@
         if (!self.rotateClockwiseButtonHidden) {
             [buttonsInOrderHorizontally addObject:self.rotateClockwiseButton];
         }
+         [buttonsInOrderHorizontally addObject:self.title];
+        
         [self layoutToolbarButtons:buttonsInOrderHorizontally withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:YES];
     }
     else {
@@ -269,9 +312,13 @@
         if (!self.rotateClockwiseButtonHidden) {
             [buttonsInOrderVertically addObject:self.rotateClockwiseButton];
         }
+         
+       
         
         [self layoutToolbarButtons:buttonsInOrderVertically withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:NO];
+    
     }
+    
 }
 
 // The convenience method for calculating button's frame inside of the container rect
@@ -332,7 +379,7 @@
     if (_clampButtonHidden == clampButtonHidden)
         return;
     
-    _clampButtonHidden = clampButtonHidden;
+    _clampButtonHidden = YES;
     [self setNeedsLayout];
 }
 
