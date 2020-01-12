@@ -168,7 +168,7 @@
         frame.size.width = MIN(self.frame.size.width / 3.0, self.cancelTextButton.frame.size.width);
 
         //If normal layout, place on the left side, else place on the right
-        if (self.reverseContentLayout == NO) {
+        if (self.reverseContentLayout == YES) {
             frame.origin.x = insetPadding;
         }
         else {
@@ -179,7 +179,7 @@
         // Work out the Done button frame
         frame.size.width = MIN(self.frame.size.width / 3.0, self.doneTextButton.frame.size.width);
         
-        if (self.reverseContentLayout == NO) {
+        if (self.reverseContentLayout == YES) {
             frame.origin.x = boundsSize.width - (frame.size.width + insetPadding);
         }
         else {
