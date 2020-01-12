@@ -117,9 +117,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     self.cropView.frame = [self frameForCropViewWithVerticalLayout:self.verticalLayout];
     self.toolbar.frame = [self frameForToolbarWithVerticalLayout:self.verticalLayout];
 
-    // Set up toolbar default behaviour
-    self.toolbar.clampButtonHidden = self.aspectRatioPickerButtonHidden || circularMode;
-    self.toolbar.rotateClockwiseButtonHidden = self.rotateClockwiseButtonHidden;
+    
     
     // Set up the toolbar button actions
     __weak typeof(self) weakSelf = self;
@@ -1098,40 +1096,6 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     return self.cropView.aspectRatioLockEnabled;
 }
 
-- (void)setRotateButtonsHidden:(BOOL)rotateButtonsHidden
-{
-    self.toolbar.rotateCounterclockwiseButtonHidden = rotateButtonsHidden;
-    self.toolbar.rotateClockwiseButtonHidden = rotateButtonsHidden;
-}
-
-- (void)setResetButtonHidden:(BOOL)resetButtonHidden
-{
-    self.toolbar.resetButtonHidden = resetButtonHidden;
-}
-
-- (BOOL)rotateButtonsHidden
-{
-    return self.toolbar.rotateCounterclockwiseButtonHidden && self.toolbar.rotateClockwiseButtonHidden;
-}
-
-- (void)setRotateClockwiseButtonHidden:(BOOL)rotateClockwiseButtonHidden
-{
-    self.toolbar.rotateClockwiseButtonHidden = rotateClockwiseButtonHidden;
-}
-
-- (BOOL)rotateClockwiseButtonHidden {
-    return self.toolbar.rotateClockwiseButtonHidden;
-}
-
-- (void)setAspectRatioPickerButtonHidden:(BOOL)aspectRatioPickerButtonHidden
-{
-    self.toolbar.clampButtonHidden = aspectRatioPickerButtonHidden;
-}
-
-- (BOOL)aspectRatioPickerButtonHidden
-{
-    return self.toolbar.clampButtonHidden;
-}
 
 - (void)setDoneButtonHidden:(BOOL)doneButtonHidden
 {
