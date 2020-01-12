@@ -164,15 +164,104 @@ open class CropViewController: UIViewController, TOCropViewControllerDelegate {
         get { return toCropViewController.customAspectRatio }
     }
     
-   
-
+    /**
+     Title label which can be used to show instruction on the top of the crop view controller
+     */
+    public var titleLabel: UILabel? {
+        return toCropViewController.titleLabel
+    }
+    
+    /**
+     If true, while it can still be resized, the crop box will be locked to its current aspect ratio.
+     
+     If this is set to YES, and `resetAspectRatioEnabled` is set to NO, then the aspect ratio
+     button will automatically be hidden from the toolbar.
+     
+     Default is false.
+     */
+    public var aspectRatioLockEnabled: Bool {
+        set { toCropViewController.aspectRatioLockEnabled = newValue }
+        get { return toCropViewController.aspectRatioLockEnabled }
+    }
+    
+    /**
+     If true, a custom aspect ratio is set, and the aspectRatioLockEnabled is set to true, the crop box will swap it's dimensions depending on portrait or landscape sized images.  This value also controls whether the dimensions can swap when the image is rotated.
+     
+     Default is false.
+     */
+    public var aspectRatioLockDimensionSwapEnabled: Bool {
+        set { toCropViewController.aspectRatioLockDimensionSwapEnabled = newValue }
+        get { return toCropViewController.aspectRatioLockDimensionSwapEnabled }
+    }
+    
+    /**
+     If true, tapping the reset button will also reset the aspect ratio back to the image
+     default ratio. Otherwise, the reset will just zoom out to the current aspect ratio.
+     
+     If this is set to false, and `aspectRatioLockEnabled` is set to YES, then the aspect ratio
+     button will automatically be hidden from the toolbar.
+     
+     Default is true
+     */
+    public var resetAspectRatioEnabled: Bool {
+        set { toCropViewController.resetAspectRatioEnabled = newValue }
+        get { return toCropViewController.resetAspectRatioEnabled }
+    }
+    
+    /**
+     The position of the Toolbar the default value is `TOCropViewControllerToolbarPositionBottom`.
+     */
     public var toolbarPosition: CropViewControllerToolbarPosition {
         set { toCropViewController.toolbarPosition = newValue }
         get { return toCropViewController.toolbarPosition }
     }
-
     
- 
+    /**
+     When disabled, an additional rotation button that rotates the canvas in
+     90-degree segments in a clockwise direction is shown in the toolbar.
+     
+     Default is false.
+     */
+    public var rotateClockwiseButtonHidden: Bool {
+        set { toCropViewController.rotateClockwiseButtonHidden = newValue }
+        get { return toCropViewController.rotateClockwiseButtonHidden }
+    }
+    
+    /**
+     When enabled, hides the rotation button, as well as the alternative rotation
+     button visible when `showClockwiseRotationButton` is set to true.
+     
+     Default is false.
+     */
+    public var rotateButtonsHidden: Bool {
+        set { toCropViewController.rotateButtonsHidden = newValue }
+        get { return toCropViewController.rotateButtonsHidden }
+    }
+    /**
+     When enabled, hides the 'Reset' button on the toolbar.
+
+     Default is false.
+     */
+    public var resetButtonHidden: Bool {
+        set { toCropViewController.resetButtonHidden = newValue }
+        get { return toCropViewController.resetButtonHidden }
+    }
+    
+    /**
+     When enabled, hides the 'Aspect Ratio Picker' button on the toolbar.
+     
+     Default is false.
+     */
+    public var aspectRatioPickerButtonHidden: Bool {
+        set { toCropViewController.aspectRatioPickerButtonHidden = newValue }
+        get { return toCropViewController.aspectRatioPickerButtonHidden }
+    }
+    
+    /**
+     When enabled, hides the 'Done' button on the toolbar.
+
+     Default is false.
+     */
     public var doneButtonHidden: Bool {
         set { toCropViewController.doneButtonHidden = newValue }
         get { return toCropViewController.doneButtonHidden }
@@ -529,4 +618,5 @@ extension CropViewController {
         }
     }
 }
+
 

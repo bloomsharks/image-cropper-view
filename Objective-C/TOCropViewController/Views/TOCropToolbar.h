@@ -43,12 +43,17 @@ NS_ASSUME_NONNULL_BEGIN
 /* The 'Cancel' buttons to cancel the crop. The text button is displayed
  in portrait mode and the icon one, in landscape. */
 @property (nonatomic, strong, readonly) UIButton *cancelTextButton;
-
+@property (nonatomic, strong, readonly) UIButton *cancelIconButton;
 @property (nonatomic, readonly) UIView *visibleCancelButton;
 @property (nonatomic, copy) NSString *cancelTextButtonTitle;
 
 /* The cropper control buttons */
+@property (nonatomic, strong, readonly)  UIButton *rotateCounterclockwiseButton;
+@property (nonatomic, strong, readonly)  UIButton *resetButton;
+@property (nonatomic, strong, readonly)  UIButton *clampButton;
+@property (nullable, nonatomic, strong, readonly) UIButton *rotateClockwiseButton;
 
+@property (nonatomic, readonly) UIButton *rotateButton; // Points to `rotateCounterClockwiseButton`
 
 /* Button feedback handler blocks */
 @property (nullable, nonatomic, copy) void (^cancelButtonTapped)(void);
@@ -62,7 +67,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL clampButtonGlowing;
 @property (nonatomic, readonly) CGRect clampButtonFrame;
 
-
+/* Aspect ratio button visibility settings */
+@property (nonatomic, assign) BOOL clampButtonHidden;
+@property (nonatomic, assign) BOOL rotateCounterclockwiseButtonHidden;
+@property (nonatomic, assign) BOOL rotateClockwiseButtonHidden;
+@property (nonatomic, assign) BOOL resetButtonHidden;
 @property (nonatomic, assign) BOOL doneButtonHidden;
 @property (nonatomic, assign) BOOL cancelButtonHidden;
 
