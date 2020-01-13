@@ -67,7 +67,7 @@
         self.reverseContentLayout = ([UIView userInterfaceLayoutDirectionForSemanticContentAttribute:self.semanticContentAttribute] == UIUserInterfaceLayoutDirectionRightToLeft);
     }
     else {
-        self.reverseContentLayout = [[[NSLocale preferredLanguages] objectAtIndex:0] hasPrefix:@"ar"];
+        self.reverseContentLayout = [[[NSLocale preferredLanguages] objectAtIndex:0] hasPrefix:@"ZZ"];
     }
     
     // Get the resource bundle depending on the framework/dependency manager we're using
@@ -137,20 +137,20 @@
     [_clampButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_clampButton];
     
-    _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
-    _rotateCounterclockwiseButton.tintColor = [UIColor whiteColor];
-    [_rotateCounterclockwiseButton setImage:[TOCropToolbar rotateCCWImage] forState:UIControlStateNormal];
-    [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_rotateCounterclockwiseButton];
-    
-    _rotateClockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    _rotateClockwiseButton.contentMode = UIViewContentModeCenter;
-    _rotateClockwiseButton.tintColor = [UIColor whiteColor];
-    [_rotateClockwiseButton setImage:[TOCropToolbar rotateCWImage] forState:UIControlStateNormal];
-    [_rotateClockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:_rotateClockwiseButton];
-    
+//    _rotateCounterclockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    _rotateCounterclockwiseButton.contentMode = UIViewContentModeCenter;
+//    _rotateCounterclockwiseButton.tintColor = [UIColor whiteColor];
+//    [_rotateCounterclockwiseButton setImage:[TOCropToolbar rotateCCWImage] forState:UIControlStateNormal];
+//    [_rotateCounterclockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:_rotateCounterclockwiseButton];
+//    
+//    _rotateClockwiseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//    _rotateClockwiseButton.contentMode = UIViewContentModeCenter;
+//    _rotateClockwiseButton.tintColor = [UIColor whiteColor];
+//    [_rotateClockwiseButton setImage:[TOCropToolbar rotateCWImage] forState:UIControlStateNormal];
+//    [_rotateClockwiseButton addTarget:self action:@selector(buttonTapped:) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:_rotateClockwiseButton];
+//    
     _resetButton = [UIButton buttonWithType:UIButtonTypeSystem];
     _resetButton.contentMode = UIViewContentModeCenter;
     _resetButton.tintColor = [UIColor whiteColor];
@@ -185,9 +185,7 @@
    
     
    
-   
-    
-   
+
     
 #if TOCROPTOOLBAR_DEBUG_SHOWING_BUTTONS_CONTAINER_RECT
     static UIView *containerView = nil;
@@ -282,23 +280,8 @@
         CGSize buttonSize = (CGSize){44.0f,44.0f};
         
         NSMutableArray *buttonsInOrderVertically = [NSMutableArray new];
-        if (!self.rotateCounterclockwiseButtonHidden) {
-            [buttonsInOrderVertically addObject:self.rotateCounterclockwiseButton];
-        }
-        
-        if (!self.resetButtonHidden) {
-            [buttonsInOrderVertically addObject:self.resetButton];
-        }
-        
-        if (!self.clampButtonHidden) {
-            [buttonsInOrderVertically addObject:self.clampButton];
-        }
-        
-        if (!self.rotateClockwiseButtonHidden) {
-            [buttonsInOrderVertically addObject:self.rotateClockwiseButton];
-        }
+ 
          
-       
         
         [self layoutToolbarButtons:buttonsInOrderVertically withSameButtonSize:buttonSize inContainerRect:containerRect horizontally:NO];
     
@@ -340,19 +323,19 @@
         if (self.doneButtonTapped)
             self.doneButtonTapped();
     }
-    else if (button == self.resetButton && self.resetButtonTapped) {
-        self.resetButtonTapped();
-    }
-    else if (button == self.rotateCounterclockwiseButton && self.rotateCounterclockwiseButtonTapped) {
-        self.rotateCounterclockwiseButtonTapped();
-    }
-    else if (button == self.rotateClockwiseButton && self.rotateClockwiseButtonTapped) {
-        self.rotateClockwiseButtonTapped();
-    }
-    else if (button == self.clampButton && self.clampButtonTapped) {
-        self.clampButtonTapped();
-        return;
-    }
+//    else if (button == self.resetButton && self.resetButtonTapped) {
+//        self.resetButtonTapped();
+//    }
+//    else if (button == self.rotateCounterclockwiseButton && self.rotateCounterclockwiseButtonTapped) {
+//        self.rotateCounterclockwiseButtonTapped();
+//    }
+//    else if (button == self.rotateClockwiseButton && self.rotateClockwiseButtonTapped) {
+//        self.rotateClockwiseButtonTapped();
+//    }
+//    else if (button == self.clampButton && self.clampButtonTapped) {
+//        self.clampButtonTapped();
+//        return;
+//    }
 }
 
 - (CGRect)clampButtonFrame
@@ -360,13 +343,13 @@
     return self.clampButton.frame;
 }
 
-- (void)setClampButtonHidden:(BOOL)clampButtonHidden {
-    if (_clampButtonHidden == clampButtonHidden)
-        return;
-    
-    _clampButtonHidden = YES;
-    [self setNeedsLayout];
-}
+//- (void)setClampButtonHidden:(BOOL)clampButtonHidden {
+//    if (_clampButtonHidden == clampButtonHidden)
+//        return;
+//
+//    _clampButtonHidden = YES;
+//    [self setNeedsLayout];
+//}
 
 - (void)setClampButtonGlowing:(BOOL)clampButtonGlowing
 {
@@ -381,14 +364,14 @@
         self.clampButton.tintColor = [UIColor whiteColor];
 }
 
-- (void)setRotateCounterClockwiseButtonHidden:(BOOL)rotateButtonHidden
-{
-    if (_rotateCounterclockwiseButtonHidden == rotateButtonHidden)
-        return;
-    
-    _rotateCounterclockwiseButtonHidden = rotateButtonHidden;
-    [self setNeedsLayout];
-}
+//- (void)setRotateCounterClockwiseButtonHidden:(BOOL)rotateButtonHidden
+//{
+//    if (_rotateCounterclockwiseButtonHidden == rotateButtonHidden)
+//        return;
+//
+//    _rotateCounterclockwiseButtonHidden = rotateButtonHidden;
+//    [self setNeedsLayout];
+//}
 
 - (BOOL)resetButtonEnabled
 {
@@ -629,31 +612,31 @@
 
 #pragma mark - Accessors -
 
-- (void)setRotateClockwiseButtonHidden:(BOOL)rotateClockwiseButtonHidden
-{
-    if (_rotateClockwiseButtonHidden == rotateClockwiseButtonHidden) {
-        return;
-    }
+//- (void)setRotateClockwiseButtonHidden:(BOOL)rotateClockwiseButtonHidden
+//{
+//    if (_rotateClockwiseButtonHidden == rotateClockwiseButtonHidden) {
+//        return;
+//    }
+//
+//    _rotateClockwiseButtonHidden = rotateClockwiseButtonHidden;
+//
+//    [self setNeedsLayout];
+//}
+//
+//- (void)setResetButtonHidden:(BOOL)resetButtonHidden
+//{
+//    if (_resetButtonHidden == resetButtonHidden) {
+//        return;
+//    }
     
-    _rotateClockwiseButtonHidden = rotateClockwiseButtonHidden;
-    
-    [self setNeedsLayout];
-}
-
-- (void)setResetButtonHidden:(BOOL)resetButtonHidden
-{
-    if (_resetButtonHidden == resetButtonHidden) {
-        return;
-    }
-    
-    _resetButtonHidden = resetButtonHidden;
-    
-    [self setNeedsLayout];
-}
-- (UIButton *)rotateButton
-{
-    return self.rotateCounterclockwiseButton;
-}
+//    _resetButtonHidden = resetButtonHidden;
+//
+//    [self setNeedsLayout];
+//}
+//- (UIButton *)rotateButton
+//{
+//    return self.rotateCounterclockwiseButton;
+//}
 
 - (void)setStatusBarHeightInset:(CGFloat)statusBarHeightInset
 {

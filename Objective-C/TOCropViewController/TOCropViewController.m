@@ -123,10 +123,7 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     __weak typeof(self) weakSelf = self;
     self.toolbar.doneButtonTapped   = ^{ [weakSelf doneButtonTapped]; };
     self.toolbar.cancelButtonTapped = ^{ [weakSelf cancelButtonTapped]; };
-    self.toolbar.resetButtonTapped = ^{ [weakSelf resetCropViewLayout]; };
-    self.toolbar.clampButtonTapped = ^{ [weakSelf showAspectRatioDialog]; };
-    self.toolbar.rotateCounterclockwiseButtonTapped = ^{ [weakSelf rotateCropViewCounterclockwise]; };
-    self.toolbar.rotateClockwiseButtonTapped        = ^{ [weakSelf rotateCropViewClockwise]; };
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

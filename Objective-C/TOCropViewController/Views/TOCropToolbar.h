@@ -48,30 +48,30 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *cancelTextButtonTitle;
 
 /* The cropper control buttons */
-@property (nonatomic, strong, readonly)  UIButton *rotateCounterclockwiseButton;
-@property (nonatomic, strong, readonly)  UIButton *resetButton;
-@property (nonatomic, strong, readonly)  UIButton *clampButton;
-@property (nullable, nonatomic, strong, readonly) UIButton *rotateClockwiseButton;
+//@property (nonatomic, strong, readonly)  UIButton *rotateCounterclockwiseButton;
+//@property (nonatomic, strong, readonly)  UIButton *resetButton;
+//@property (nonatomic, strong, readonly)  UIButton *clampButton;
+//@property (nullable, nonatomic, strong, readonly) UIButton *rotateClockwiseButton;
 
 @property (nonatomic, readonly) UIButton *rotateButton; // Points to `rotateCounterClockwiseButton`
 
 /* Button feedback handler blocks */
 @property (nullable, nonatomic, copy) void (^cancelButtonTapped)(void);
 @property (nullable, nonatomic, copy) void (^doneButtonTapped)(void);
-@property (nullable, nonatomic, copy) void (^rotateCounterclockwiseButtonTapped)(void);
-@property (nullable, nonatomic, copy) void (^rotateClockwiseButtonTapped)(void);
-@property (nullable, nonatomic, copy) void (^clampButtonTapped)(void);
-@property (nullable, nonatomic, copy) void (^resetButtonTapped)(void);
+//@property (nullable, nonatomic, copy) void (^rotateCounterclockwiseButtonTapped)(void);
+//@property (nullable, nonatomic, copy) void (^rotateClockwiseButtonTapped)(void);
+//@property (nullable, nonatomic, copy) void (^clampButtonTapped)(void);
+//@property (nullable, nonatomic, copy) void (^resetButtonTapped)(void);
 
 /* State management for the 'clamp' button */
 @property (nonatomic, assign) BOOL clampButtonGlowing;
 @property (nonatomic, readonly) CGRect clampButtonFrame;
 
 /* Aspect ratio button visibility settings */
-@property (nonatomic, assign) BOOL clampButtonHidden;
-@property (nonatomic, assign) BOOL rotateCounterclockwiseButtonHidden;
-@property (nonatomic, assign) BOOL rotateClockwiseButtonHidden;
-@property (nonatomic, assign) BOOL resetButtonHidden;
+//@property (nonatomic, assign) BOOL clampButtonHidden;
+//@property (nonatomic, assign) BOOL rotateCounterclockwiseButtonHidden;
+//@property (nonatomic, assign) BOOL rotateClockwiseButtonHidden;
+//@property (nonatomic, assign) BOOL resetButtonHidden;
 @property (nonatomic, assign) BOOL doneButtonHidden;
 @property (nonatomic, assign) BOOL cancelButtonHidden;
 
