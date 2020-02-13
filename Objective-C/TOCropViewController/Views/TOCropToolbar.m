@@ -109,13 +109,12 @@
     [self addSubview:_cancelTextButton];
     
     UIFont * customFont = [UIFont systemFontOfSize: 17]; //custom font
-    CGSize labelSize = [@"asda" sizeWithFont:customFont constrainedToSize:CGSizeMake(40, 20) lineBreakMode:NSLineBreakByTruncatingTail];
+    CGSize labelSize = [@"Crop" sizeWithFont:customFont constrainedToSize:CGSizeMake(35, 20) lineBreakMode:NSLineBreakByTruncatingTail];
     _title = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, labelSize.width, labelSize.height)];
     _title.text = @"Crop";
     _title.font = customFont;
     _title.numberOfLines = 1;
     _title.adjustsFontSizeToFitWidth = YES;
-    _title.adjustsLetterSpacingToFitWidth = YES;
     _title.minimumScaleFactor = 10.0f/12.0f;
     _title.clipsToBounds = YES;
     _title.backgroundColor = [UIColor clearColor];
